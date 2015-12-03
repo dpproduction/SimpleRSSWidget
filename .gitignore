@@ -1,0 +1,13 @@
+*.iml
+.gradle
+/local.properties
+.idea/
+/build
+/captures
+*.hprof
+captures/
+# generated files
+bin/
+gen/
+**/build
+
