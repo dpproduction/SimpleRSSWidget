@@ -8,10 +8,24 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.dgroup.simplersswidget.ConfigActivity">
+    tools:context=".ui.activity.ConfigActivity">
 
-    <TextView
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rss_uri"
+        android:hint="@string/rss_edit_hint"
+        android:textColor="@android:color/black"
+        android:inputType="textUri"
+        android:singleLine="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"/>
+        android:text="@android:string/ok"
+        android:id="@+id/ok_btn"
+        android:layout_below="@+id/rss_uri"
+        android:layout_centerHorizontal="true"/>
 </RelativeLayout>
