@@ -9,6 +9,10 @@ import java.util.ArrayList;
 
 public class Utils {
 
+    public static final int SECOND = 1000;
+
+    public static final int MINUTE = 60 * SECOND;
+
     public static void saveToPref(Context context, int appWidgetId, String key, String value) {
         SharedPreferences.Editor prefs = context.getSharedPreferences(AppConstants.PREFS_NAME, Context.MODE_PRIVATE).edit();
         prefs.putString(key+appWidgetId, value).commit();
