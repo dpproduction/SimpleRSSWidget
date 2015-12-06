@@ -4,4 +4,6 @@
     <string name="receiver_label">RSSWidget</string>
     <string name="rss_edit_hint">RSS feed url</string>
     <string name="error_check_url">The url is invalid</string>
+    <string name="error">Loading error</string>
+
 </resources>

@@ -22,7 +22,7 @@ public class Api {
     public Api(String endpoint){
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setClient(new OkClient(getOkHttpClient()))
-                        .setLogLevel(RestAdapter.LogLevel.FULL )
+                        .setLogLevel(RestAdapter.LogLevel.HEADERS)
                         .setEndpoint(endpoint)
                         .setConverter(new SimpleXMLConverter())
                 .build();
