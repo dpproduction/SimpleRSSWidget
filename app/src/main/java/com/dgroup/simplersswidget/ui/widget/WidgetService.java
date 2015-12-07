@@ -75,9 +75,7 @@ public class WidgetService extends RemoteViewsService {
 
         @Override
         public RemoteViews getLoadingView() {
-            return new RemoteViews(
-                    RSSWidgetApplication.getInstance().getPackageName(),
-                    R.layout.empty_layout);
+            return null;
         }
 
         @Override
