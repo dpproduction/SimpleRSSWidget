@@ -72,7 +72,7 @@ public class RSSDataSource implements DownloadRSSTask.LoadingCallback {
     public void reload(int widgetId) {
         this.widgetId = widgetId;
         String rssUrl = getRssUrl();
-        if (!rssUrl.trim().isEmpty() && ((System.currentTimeMillis() - lastSync) > 55 * AppConstants.SECOND)) {
+        if (!rssUrl.trim().isEmpty() && ((System.currentTimeMillis() - lastSync) > 5 * AppConstants.SECOND)) {
             if (isNeedToChangeStatus(rssUrl)) {
                 RSSWidgetProvider.updateStatus(widgetId, false, true);
             }

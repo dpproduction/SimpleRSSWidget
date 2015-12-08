@@ -12,11 +12,11 @@ public class Channel {
     @ElementList(name = "item", inline = true)
     private List<Article> articleList;
 
-    @Element(name = "title")
+    @Element(name = "title", required=false)
     private String title;
 
-    @Element(name = "link", required=false)
-    private String link;
+    @ElementList(entry="link", inline=true)
+    private List<String> link;
 
     @Element(name = "description")
     private String description;
@@ -29,7 +29,7 @@ public class Channel {
         return title;
     }
 
-    public String getLink() {
+    public List<String> getLink() {
         return link;
     }
 
