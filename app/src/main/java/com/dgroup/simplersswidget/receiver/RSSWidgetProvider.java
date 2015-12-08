@@ -14,7 +14,6 @@ import android.widget.RemoteViews;
 import com.dgroup.simplersswidget.R;
 import com.dgroup.simplersswidget.app.RSSWidgetApplication;
 import com.dgroup.simplersswidget.constants.AppConstants;
-import com.dgroup.simplersswidget.core.RSSDataSource;
 import com.dgroup.simplersswidget.ui.activity.ConfigActivity;
 import com.dgroup.simplersswidget.ui.widget.WidgetService;
 import com.dgroup.simplersswidget.util.Utils;
@@ -68,8 +67,7 @@ public class RSSWidgetProvider extends AppWidgetProvider {
             intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
             remoteViews.setRemoteAdapter(R.id.page_flipper, intent);
             remoteViews.setEmptyView(R.id.page_flipper, android.R.id.empty);
-
-
+            
             //adapter item click
             Intent itemClickIntent = new Intent(context, RSSWidgetProvider.class);
             itemClickIntent.setAction(ACTION_OPEN_URL);
@@ -158,8 +156,6 @@ public class RSSWidgetProvider extends AppWidgetProvider {
 
                     AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
                     appWidgetManager.partiallyUpdateAppWidget(widgetId, rv);
-                    appWidgetManager.notifyAppWidgetViewDataChanged(widgetId,
-                            R.id.page_flipper);
                 }
                 break;
             case ACTION_PREV:
@@ -171,8 +167,6 @@ public class RSSWidgetProvider extends AppWidgetProvider {
 
                     AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
                     appWidgetManager.partiallyUpdateAppWidget(widgetId, rv);
-                    appWidgetManager.notifyAppWidgetViewDataChanged(widgetId,
-                            R.id.page_flipper);
                 }
                 break;
             case ACTION_OPEN_URL:
@@ -187,7 +181,6 @@ public class RSSWidgetProvider extends AppWidgetProvider {
     }
 
     public static void syncData(int... ids) {
-        RSSDataSource.setIsForceUpdate(true);
         for (int widgetId : ids) {
             AppWidgetManager.getInstance(RSSWidgetApplication.getInstance()).notifyAppWidgetViewDataChanged(widgetId,
                     R.id.page_flipper);

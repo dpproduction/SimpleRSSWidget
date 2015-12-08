@@ -23,8 +23,6 @@ public class RSSDataSource implements DownloadRSSTask.LoadingCallback {
 
     private List<Article> rssFeed;
 
-    private static boolean isForceUpdate;
-
     private ContentListener contentListener;
 
     public interface ContentListener {
@@ -38,11 +36,16 @@ public class RSSDataSource implements DownloadRSSTask.LoadingCallback {
     @Override
     public void onLoadingComplete(RSS rss) {
         RSSWidgetProvider.updateStatus(widgetId, false, false);
-        this.rssFeed = rss.getChannel().getArticleList();
-        if (contentListener != null) {
-            contentListener.onDataUpdated();
+
+        List<Article> incomingRss = rss.getChannel().getArticleList();
+
+        if(rssFeed==null || incomingRss==null || !rssFeed.equals(incomingRss)){
+            this.rssFeed = rss.getChannel().getArticleList();
+            if (contentListener != null) {
+                contentListener.onDataUpdated();
+            }
+            currentRssUrl = getRssUrl();
         }
-        currentRssUrl = getRssUrl();
     }
 
     @Override
@@ -69,14 +72,13 @@ public class RSSDataSource implements DownloadRSSTask.LoadingCallback {
     public void reload(int widgetId) {
         this.widgetId = widgetId;
         String rssUrl = getRssUrl();
-        if (!rssUrl.trim().isEmpty() && ((System.currentTimeMillis() - lastSync) > 55 * AppConstants.SECOND || isForceUpdate)) {
+        if (!rssUrl.trim().isEmpty() && ((System.currentTimeMillis() - lastSync) > 55 * AppConstants.SECOND)) {
             if (isNeedToChangeStatus(rssUrl)) {
                 RSSWidgetProvider.updateStatus(widgetId, false, true);
             }
             lastSync = System.currentTimeMillis();
             new DownloadRSSTask(this).executeOnCustomExecutor(Uri.parse(rssUrl));
         }
-        isForceUpdate = false;
     }
 
     private boolean isNeedToChangeStatus(String rssUrl) {
@@ -85,10 +87,6 @@ public class RSSDataSource implements DownloadRSSTask.LoadingCallback {
 
     public void clear() {
         contentListener = null;
-    }
-
-    public static void setIsForceUpdate(boolean isForceUpdate) {
-        RSSDataSource.isForceUpdate = isForceUpdate;
     }
 
     private String getRssUrl() {
