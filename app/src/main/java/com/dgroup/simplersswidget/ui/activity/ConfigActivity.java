@@ -61,7 +61,7 @@ public class ConfigActivity extends AppCompatActivity {
 
                 Utils.saveToPref(ConfigActivity.this, mAppWidgetId, AppConstants.RSS_URL, rssUri);
 
-                RSSWidgetProvider.syncData(mAppWidgetId);
+                RSSWidgetProvider.syncDataAndClearPosition(mAppWidgetId);
 
                 Intent resultValue = new Intent();
                 resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);

@@ -176,15 +176,27 @@ public class RSSWidgetProvider extends AppWidgetProvider {
                 startBrowser.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(startBrowser);
                 break;
-
         }
     }
 
+    public static void syncDataAndClearPosition(int... ids){
+        resetPosition(ids[0]);
+        syncData(ids);
+    }
+
     public static void syncData(int... ids) {
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(RSSWidgetApplication.getInstance());
         for (int widgetId : ids) {
-            AppWidgetManager.getInstance(RSSWidgetApplication.getInstance()).notifyAppWidgetViewDataChanged(widgetId,
+            appWidgetManager.notifyAppWidgetViewDataChanged(widgetId,
                     R.id.page_flipper);
         }
+    }
+
+    private static void resetPosition(int widgetId){
+        RemoteViews rv = new RemoteViews(RSSWidgetApplication.getInstance().getPackageName(),
+                R.layout.widget_layout);
+        rv.setDisplayedChild(R.id.page_flipper, 0);
+        AppWidgetManager.getInstance(RSSWidgetApplication.getInstance()).partiallyUpdateAppWidget(widgetId, rv);
     }
 
 }
