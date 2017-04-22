@@ -3,4 +3,4 @@ Widget based on AdapterViewFlipper, every minute AlarmManager sends a request to
 Widget contains ConfigActivity where you can choose own rss url.
 
 <h1>License</h1>
-GNU General Public License v 3.0
+Apache License, Version 2.0
